@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>21</title>
+	<meta charset="utf-8">
+</head>
+<style type="text/css">
+body{
+	font-family: 'Microsoft YaHei';
+}
+.skillc div{
+	display: inline-block;
+	padding: 5px 5px;
+	margin: 5px 5px;
+	background-color: #84C9FF;
+}
+.hobby{
+	margin-top: 40px;
+}
+.hobbyc div{
+	display: inline-block;
+	padding: 5px 5px;
+	margin: 5px 5px;
+	background-color: #FFC881;
+}
+</style>
+<body>
+	<div class="skill">
+		<label for="skill">Tag:</label>
+		<input type="text" name="skill">
+		<div class="sikllc"></div>
+	</div>
+	<div class="hobby">
+		<label for="hobby">Tag:</label>
+		<textarea></textarea>
+		<input type="button" value="确认兴趣爱好">
+		<div class="hobbyc"></div>
+	</div>
+	<script type="text/javascript">
+	function addEvent(element,type,handler){
+		if(element.addEventListener){
+			element.addEventListener(type,handler,false);
+		}else if(element.attachEvent){
+			element.attachEvent('on'+type,handler);
+		}else{
+			element['on'+type] = handler;
+		}
+	}
+	var queue = {
+		arr: [],
+		leftpush: function(num){
+			this.arr.unshift(num);
+			queue.render();
+		},
+		rightpush: function(num){
+			for(var i in num){
+				this.arr.push(num[i]);
+			}
+			queue.render();
+		},
+		leftout: function(){
+			// if(this.arr.length == 0){
+			// 	alert('数组为空');
+			// }else{
+				this.arr.shift();
+				queue.render();
+			// }
+			console.log(this.arr);
+		},
+		rightout: function(){
+			if(this.arr.length == 0){
+				alert('数组为空');
+			}else{
+				this.arr.pop();
+				queue.render();
+			}
+		},
+		render: function(){
+			var inn = '';
+			var list = document.querySelector('.hobbyc');
+			for(var i = 0 ; i < this.arr.length ; i++){
+				inn += '<div>'+this.arr[i]+'</div>';
+			}
+			list.innerHTML = inn;
+		},
+		// unique: function(a){
+		// 	if(this.arr.indexOf(a) == -1) {return true}
+		// 	else {return false};
+		// },
+		range: function(){
+			if(arr.length>9){
+				this.arr.shift();
+			}
+		}
+	};
+	function splitinput (num){
+		var input = [];
+		input = num.split(/[,，；\s\n]+/);
+		return input;
+	}
+	function each(arr,fn){
+		for(var i = 0; i < arr.length ; i++){
+			fn(arr[i],i);
+		}
+	}
+	var hobby = document.querySelector('.hobby');
+	var hobbyc = document.querySelector('.hobbyc');
+	var skill = document.querySelector('.skill');
+	var skillc = document.querySelector('.skillc');
+	var btn = hobby.getElementsByTagName('input')[0];
+	addEvent(btn,'click',cc);
+	function cc(event){
+		var e = event || window.event;
+		var texta = document.getElementsByTagName('textarea')[0].value.trim();
+		var input = each(splitinput(texta),function(item,index){
+			if(queue.arr.indexOf(item) == -1){
+				queue.leftpush(item);
+				if(queue.arr.length>10){
+					queue.leftout();
+				}
+			}
+		})
+	}
+	</script>
+</body>
+</html>

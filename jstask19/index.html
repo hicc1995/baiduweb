@@ -1,0 +1,103 @@
+<html>
+<head>
+	<title>动态排序19</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+	.list{
+		display: flex;
+		width: 80%;
+		align-items: flex-end;
+	}
+	.list span{
+		display: inline-block;
+		width: 20px;
+		margin: 0 5px;
+		background-color: #FFE793;
+		text-align: center;
+	}
+	</style>
+</head>
+<body>
+	<body>
+		<input type="text" placeholder="请输入数字">
+		<div>
+			<input type="button" value="左侧入" class="btn">
+			<input type="button" value="右侧入" class="btn">
+			<input type="button" value="左侧出" class="btn">
+			<input type="button" value="右侧出" class="btn">
+			<input type="button" value="随机数组" class="btn">
+			<input type="button" value="冒泡" class="btn">
+		</div>
+		<div class="list"></div>
+		<script type="text/javascript">
+		var arr = [];//最多放60个数字
+		function render(){
+			var list = document.getElementsByClassName('list')[0];
+			var inn = '';
+			for(var i = 0 ; i < arr.length ; i++){
+				inn += '<span style="height:'+arr[i]+'px;"></span>';
+			}
+			list.innerHTML = inn;
+		}
+		var bod = document.getElementsByTagName('div')[0];
+		bod.addEventListener('click',function(event){
+			var num = document.getElementsByTagName('input')[0].value.trim();
+			var e = event || window.event;
+			if(arr.length>60){alert('长度过长')}
+			else{
+				if (e.target.value == '随机数组') {
+					for(var i = 0 ; i < 10 ; i++){
+						arr[i] = Math.round(Math.random()*100);
+						render();
+					}
+				}
+				else if(e.target.value == '冒泡'){
+					var t ,timer = null ,i = 0, j = 1;
+					timer = setInterval(run,50);
+					function run() {
+						if (i < arr.length) {
+							if (j < arr.length) {
+								if (arr[i] > arr[j]) {
+									t = arr[i];
+									arr[i] = arr[j];
+									arr[j] = t;
+									render();
+								}
+								j++;
+							} else {
+								i++;
+								j = i + 1;
+							}
+						} else {
+							clearInterval(timer);
+							return;
+						}
+				}
+			}
+				else if((/^[0-9]+$/).test(num)){
+					if(e.target.value == '左侧入'){
+						arr.unshift(num);
+						render();
+					}
+					if(e.target.value == '右侧入'){
+						arr.push(num);
+						render();
+					}
+					if(e.target.value == '左侧出'){
+						arr.shift();
+						render();
+					}
+					if(e.target.value == '右侧出'){
+						arr.pop();
+						render();
+					}
+				}
+				else{
+					alert('请输入数字！');
+				}
+			}
+		});
+		</script>
+	</body>
+</body>
+</html>

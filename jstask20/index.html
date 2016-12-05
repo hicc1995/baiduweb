@@ -1,0 +1,121 @@
+<html>
+<head>
+	<title>20</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+	.list{
+		display: flex;
+		width: 80%;
+		align-items: flex-end;
+	}
+	.list span{
+		display: inline-block;
+		padding: 2px 10px;
+		margin: 0 5px;
+		background-color: #FFE793;
+		text-align: center;
+	}
+	</style>
+</head>
+<body>
+	<div>
+		<textarea></textarea>
+		<input type="button" value="左侧入">
+		<input type="button" value="右侧入">
+		<input type="button" value="左侧出">
+		<input type="button" value="右侧出">
+		<input type="button" value="find">
+		<input type="text">
+	</div>
+	<div class="list"></div>
+	<script type="text/javascript">
+		// var arr = [];//全局数组，如果改成局部queue里需要用this
+		var bod = document.getElementsByTagName('div')[0];
+		var list = document.getElementsByClassName('list')[0];
+		// function render(){
+		// 	var inn = '';
+		// 	for(var i = 0 ; i < arr.length ; i++){
+		// 		inn += '<span>'+arr[i]+'</span>';
+		// 	}
+		// 	list.innerHTML = inn;
+		// }
+		function splitinput (num){
+			var input = [];
+			input = num.split(/[,，；\s\n]+/);
+			return input;
+		}
+		function searchvalue(findvalue){
+			var h = list.children.length;
+			for(var i = 0 ; i < h ; i++){
+				list.children[i].style.background = '#FFE793';
+			}
+			for(var j = 0 ; j < h ; j++){
+				if(list.children[j].innerHTML.indexOf(findvalue) != -1){
+					list.children[j].style.background = 'red';
+				}
+			}
+		}
+		var queue = {
+			arr:[],
+			leftpush: function(num){
+				for(var i in num){
+					this.arr.unshift(num[i]);
+				}
+				queue.render();
+			},
+			rightpush: function(num){
+				for(var i in num){
+					this.arr.push(num[i]);
+				}
+				queue.render();
+			},
+			leftout: function(num){
+				if(this.arr.length == 0){
+					alert('数组为空');
+				}else{
+					this.arr.shift();
+					queue.render();
+				}
+			},
+			rightout: function(){
+				if(this.arr.length == 0){
+					alert('数组为空');
+				}else{
+					this.arr.pop();
+					queue.render();
+				}
+			},
+			render: function(){
+				var inn = '';
+				for(var i = 0 ; i < this.arr.length ; i++){
+					inn += '<span>'+this.arr[i]+'</span>';
+				}
+				list.innerHTML = inn;
+			}
+		};
+		bod.addEventListener('click',function(event){
+			var e = event || window.event;
+			var va = e.target.value;
+			var findvalue = document.getElementsByTagName('input')[5].value.trim();
+			var value = document.getElementsByTagName('textarea')[0].value.trim();
+			var num = splitinput(value);
+			if(va == '左侧入'){
+				queue.leftpush(num);
+			}
+			if(va == '右侧入'){
+				queue.rightpush(num);
+			}
+			if(va == '左侧出'){
+				queue.leftout();
+			}
+			if(va == '右侧出'){
+				queue.rightout();
+			}
+			if(va == 'find'){
+				searchvalue(findvalue);
+				// render(findvalue);
+			}
+		});
+	</script>
+</body>
+</html>

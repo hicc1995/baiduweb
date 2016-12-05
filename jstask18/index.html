@@ -1,0 +1,65 @@
+<html>
+<head>
+	<title>js任务18加任务队列</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		.list span{
+			display: inline-block;
+			width: 100px;
+			height: 100px;
+			margin: 100 5px;
+			background-color: #FFE793;
+			text-align: center;
+		}
+
+		/*https://github.com/Five-African/task-stage2-final-submission/blob/gh-pages/task18/index.html*/
+	</style>
+</head>
+<body>
+	<div>
+		<input type="text">
+		<input type="button" value="左侧入" class="btn">
+		<input type="button" value="右侧入" class="btn">
+		<input type="button" value="左侧出" class="btn">
+		<input type="button" value="右侧出" class="btn">
+	</div>
+	<div class="list"></div>
+	<script type="text/javascript">
+		(function(){
+			var inputvalue = document.getElementsByTagName('input')[0];
+			var btn = document.getElementsByClassName('btn');
+			var bod = document.getElementsByTagName('body')[0];
+			var list = document.getElementsByClassName('list')[0];
+			function creatchild(){
+				var child = document.createElement('span');
+				console.log(inputvalue.value);
+				child.innerHTML = inputvalue.value;
+				return child;
+			}
+			bod.addEventListener('click',function(e){
+				var ta = e.target.value;
+				if(ta == '左侧入'){
+					var child = creatchild();
+					list.insertBefore(child,list.children[0]);
+					console.log(list);
+				}
+				if(ta == '右侧入'){
+					var child = creatchild();
+					list.appendChild(child);
+				}
+				if(ta == '左侧出'){
+					alert(list.firstChild.innerText);
+					list.removeChild(list.children[0]);
+				}
+				if(ta == '右侧出'){
+					alert(list.lastChild.innerText);
+					list.removeChild(list.lastChild.value);
+				}
+			})
+			list.addEventListener('click',function(e){
+				list.removeChild(e.target);
+			})
+		})();
+	</script>
+</body>
+</html>
