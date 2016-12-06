@@ -1,0 +1,65 @@
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('fonts/glyphicons-halflings-regular.eot');
+  src: url('fonts/glyphicons-halflings-regular.woff');
+  src: url('fonts/glyphicons-halflings-regular.ttf');
+} 
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-search:before {
+  content: "\e003";
+}
+.glyphicon-user:before {
+  content: "\e008";
+}
+.glyphicon-folder-open:before {
+  content: "\e118";
+}
+.glyphicon-list-alt:before {
+  content: "\e032";
+}
+.glyphicon-chevron-right:before {
+  content: "\e080";
+}
+.glyphicon-chevron-down:before {
+  content: "\e114";
+}
+.glyphicon-align-justify:before {
+  content: "\e055";
+}
+.glyphicon-star:before {
+  content: "\e006";
+}
+.glyphicon-send:before {
+  content: "\e171";
+}
+.glyphicon-picture:before {
+  content: "\e060";
+}
+.glyphicon-record:before {
+  content: "\e165";
+}
+.glyphicon-scale:before {
+  content: "\e230";
+}
+.glyphicon-calendar:before {
+  content: "\e109";
+}
+body{
+  font-family: 'MicrosoftYaHei';
+  height: 100%;
+  font-size: 16px;
+}
+ul{
+  list-style: none;
+}
